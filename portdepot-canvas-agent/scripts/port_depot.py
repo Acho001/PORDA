@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Discover and call the local Port Depot HTTP API using its live OpenAPI schema."""
+"""Discover and call the local PORDA HTTP API using its live OpenAPI schema."""
 import argparse
 import json
 import os
@@ -20,7 +20,7 @@ def request(url, method='GET', body=None, headers=None):
     except urllib.error.HTTPError as e:
         return e.code, e.headers.get('Content-Type',''), e.read()
     except Exception as e:
-        raise SystemExit(f'Port Depot request failed: {e}')
+        raise SystemExit(f'PORDA request failed: {e}')
 
 def decode(raw, content_type):
     if 'json' in content_type:

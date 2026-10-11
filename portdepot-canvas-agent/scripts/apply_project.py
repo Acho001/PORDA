@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate or apply a declarative Port Depot canvas project spec."""
+"""Validate or apply a declarative PORDA canvas project spec."""
 
 import argparse
 import copy
@@ -218,12 +218,12 @@ def apply_canvas(base, current, canvas_spec, nodes):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("spec")
-    parser.add_argument("--apply", action="store_true", help="write the validated spec to Port Depot")
+    parser.add_argument("--apply", action="store_true", help="write the validated spec to PORDA")
     parser.add_argument("--base", default="http://127.0.0.1:8765")
     parser.add_argument(
         "--asset-root",
         default=os.environ.get("PORT_DEPOT_ASSET_ROOT", ""),
-        help="Port Depot's writable storage/library directory; required when applying assets",
+        help="PORDA's writable storage/library directory; required when applying assets",
     )
     args = parser.parse_args()
 
@@ -279,5 +279,5 @@ if __name__ == "__main__":
     try:
         main()
     except Exception as error:
-        print(f"Port Depot canvas project failed: {error}", file=sys.stderr)
+        print(f"PORDA canvas project failed: {error}", file=sys.stderr)
         raise SystemExit(1)

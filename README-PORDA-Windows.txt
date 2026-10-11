@@ -1,19 +1,19 @@
-Port Depot v0.5.1 — Windows x64 本地桌面测试版
-内部构建：2026.10.01.1 / 安装器版本：1.1.1
+PORDA v0.5.3 — Windows x64 本地桌面测试版
+内部构建：2026.10.11.2 / 安装器版本：1.1.4
 
 适用：Windows 10 / Windows 11，64 位 x64。
 不提供 Windows 7/8、32 位或原生 ARM64 版本。
 
 安装与升级
-1. 下载 Port-Depot-v0.5.1-Windows-x64-Setup.exe。
+1. 下载 PORDA-v0.5.3-Windows-x64-Setup.exe。
 2. 双击安装器，选择中文或 English，按引导选择安装目录及快捷方式。
-3. 从开始菜单或桌面启动 Port Depot。
-4. 升级时关闭 Port Depot，再运行新版安装器即可。
+3. 从开始菜单或桌面启动 PORDA。
+4. 升级时关闭 PORDA，再运行新版安装器即可。
 
 安装包完整离线，使用标准 NSIS 安装器；无需系统 Python、Node.js、
 外部压缩软件或管理员权限。首次打开是独立桌面窗口。
 未采用 Authenticode 证书签名；首次启动如有 Windows 安全提示，请核对
-本仓库下载来源与 SHA256SUMS-Windows.txt 中的校验值。
+本仓库下载来源与 SHA256SUMS-PORDA.txt 中的校验值。
 
 本地数据
 %LOCALAPPDATA%\Port Depot Data
@@ -25,7 +25,9 @@ Port Depot v0.5.1 — Windows x64 本地桌面测试版
 Windows 操作
 - Ctrl+C / Ctrl+V：画布复制粘贴；文件复制支持 Windows 文件剪贴板。
 - 文件复制到资源管理器或其他应用时，粘贴支持取决于目标应用。
-- 文件和项目 ZIP / 解压后的项目文件夹可以拖入画布。
+- 外部普通文件拖入画布会实际移动到当前画板目录；Ctrl+Z 可恢复原位置。
+- 复制节点提供真实文件；输入框或选中文字的复制使用系统文字剪贴板。
+- 项目 ZIP / 解压后的项目文件夹按项目包导入。
 - 默认全局 Ctrl+Alt+S：截图保存到采集港，设置中可重新绑定。
 - 画布内截图工具可框选裁剪。
 - 原生文件选择和项目 ZIP 导出对话框；在资源管理器中显示素材。
@@ -44,10 +46,10 @@ AI Agent 在端口变化后应读取 runtime.json，并把 url 传给 Skill 的 
 
 发行与验证
 https://github.com/Acho001/port-depot-preview/releases
-验证范围以随包 Windows-validation.json 为准；自动化 Windows 验证不能
+验证范围以随包 PORDA-Windows-validation.json 为准；自动化 Windows 验证不能
 替代每一台用户电脑、每一种显示器组合和外部聊天软件的实机验收。
 许可（2026-10-01 更新）
-Port Depot 采用 PolyForm Noncommercial License 1.0.0：非商业用途免费使用；
+PORDA 采用 PolyForm Noncommercial License 1.0.0：非商业用途免费使用；
 不在许可证允许范围内的商业用途须事先取得权利人的单独授权。
 许可证：https://github.com/Acho001/port-depot-preview/blob/main/LICENSE
 商业授权联系：https://github.com/Acho001/port-depot-preview/issues
@@ -61,3 +63,9 @@ Port Depot 采用 PolyForm Noncommercial License 1.0.0：非商业用途免费�
 时间戳认证码：F940563D6514D6762259347A97451217904A33B0D3D1F9F401D106DAB97BA637
 时间戳签发时间：2026-10-01 17:18:39 (UTC+8)
 具体认证文件及范围以认证证书和对应原始文件为准；使用授权仍按上述许可证执行。
+
+画板更新
+连接线采用圆角折线、终点箭头和四方向端点；文字位于路径长度中点，编辑保持位置。
+图片取消卡片外框和标题栏；文件名在选中时显示于右上方，非选中时隐藏。
+右键可复制当前层级或子文件夹的实际目录地址；接收方需要能访问该目录。
+更新替换已有程序并删除旧名称快捷方式，仅保留一个最新版应用。

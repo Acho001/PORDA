@@ -1,4 +1,4 @@
 interface:
-  display_name: "Port Depot Canvas Agent"
-  short_description: "Build polished Port Depot projects from structured JSON"
-  default_prompt: "Use $portdepot-canvas-agent to architect, compose, aesthetically audit, apply, and verify a complete Port Depot project from structured JSON."
+  display_name: "PORDA Canvas Agent"
+  short_description: "Build polished PORDA projects from structured JSON"
+  default_prompt: "Use $portdepot-canvas-agent to architect, compose, aesthetically audit, apply, and verify a complete PORDA project from structured JSON."

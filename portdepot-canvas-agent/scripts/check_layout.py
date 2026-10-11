@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Conservative collision and centerline check for a Port Depot project spec."""
+"""Conservative collision and centerline check for a PORDA project spec."""
 import argparse
 import json
 from pathlib import Path

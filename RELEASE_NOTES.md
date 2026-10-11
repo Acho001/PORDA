@@ -1,3 +1,27 @@
+# PORDA · 泊达 v0.5.3 · 2026.10.11.2 · 2026-10-11
+
+- 产品正式更名为 **PORDA**，中文名称 **泊达**；安装包、窗口、快捷方式、平台说明和下载文件使用新名称，沿用兼容的应用身份与数据目录。
+- 两个相向节点之间采用简单的三段折线与两个圆角，端点贴合节点真实边缘并显示终点箭头；保留四方向端点、重连与折线调整。
+- 连线文字放在整条圆角路径长度的中点，以透明间隔断开文字背后的线条；拖动折线时文字跟随中点，进入编辑时保持原位置。
+- 修复连线输入框获得焦点导致整张画板滚动的问题，中文输入法确认不会提前结束编辑。
+- 图片取消卡片外框、标题栏和内边距，按真实比例完整显示；仅选中时在右上方显示文件名，双击可重命名真实文件。
+- 改进文字节点中文输入、换行、加粗等格式与完成编辑后的尺寸。
+- 右键可复制当前层级或子文件夹的实际本地目录地址；该操作不上传项目，接收方需要能访问同一目录。
+- 保留系统原生文件复制和移动：文字复制替换旧文件引用，节点复制提供真实文件，外部普通文件拖入实际移动原件，撤销恢复原文件与画板显示。
+- Windows 保留离线 NSIS 安装、中文路径、系统剪切标志、端口避让、升级和标准卸载保留数据；本版继续排除宠物功能。
+- macOS 明确最低系统为 14，并固定编译目标，避免开发工具默认版本高于本机系统而导致无法启动。
+- 本地更新仅保留最新版 PORDA.app，清理过时测试应用和重复入口；项目与素材继续保留。
+
+验证：macOS 48 项原生回归检查、141 个连线算法用例通过；安装包解压后签名校验通过，入门项目 10 张画板、13 个文件素材可读取。本地升级核对 49 个画板与 193 个文件，数据未变化。Windows [47 项最新原生验证](https://github.com/Acho001/port-depot-preview/actions/runs/38141320642)通过，结果见本版 Release 的 `PORDA-Windows-validation.json`；覆盖实际安装、原生文件剪贴板、移动及撤销、最新画板交互、旧版升级与卸载保留数据。Windows 验证环境为 Windows Server 2022 x64。
+
+Windows 安装器与 macOS 应用版本均为 **1.1.4**，内部构建均为 **2026.10.11.2**。本版仅发布应用二进制、入门指南、Skill、平台说明、验证报告和 SHA-256，不包含个人项目、素材、账号配置或内部构建输入。
+
+English: This release renames the product to PORDA / 泊达, introduces simple rounded orthogonal connectors with target arrows and half-length labels, preserves label position during editing, removes image card chrome while showing selected filenames, improves Chinese text editing, and adds local folder-path sharing. Native file clipboard and move/undo behavior remain authoritative. Compatible application IDs and data directories are retained, Windows pets are excluded, and macOS explicitly targets version 14 or later. Both platforms use build 2026.10.11.2 and product version 1.1.4. See the attached native validation reports and SHA-256 file for the tested scope and download verification.
+
+历史记录保留当时的产品名称和许可说明。
+
+---
+
 # v0.5.2 · 2026.10.07.2 · 2026-10-07
 
 - 统一使用系统剪贴板，移除节点 JSON 剪贴板与延迟粘贴回退。复制节点提供真实文件，选中文字或在输入框中复制提供文字。

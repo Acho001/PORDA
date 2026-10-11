@@ -1,4 +1,4 @@
-# Visual reasoning on Port Depot canvases
+# Visual reasoning on PORDA canvases
 
 Use this reference when the user asks to organize complex investigation, worldbuilding, research, or decisions as a whiteboard. The subject can vary; choose a visual projection by the question the viewer needs to answer.
 
@@ -15,7 +15,7 @@ Use this reference when the user asks to organize complex investigation, worldbu
 
 ## One fact, several projections
 
-Maintain a small source registry for recurring facts: stable fact ID, concise proposition, source, confidence/status, and affected entities/time/place. Attach the same `factIds` to each view node that projects that fact. In the current Port Depot canvas JSON this is metadata, **not automatic shared-data synchronization**. When a fact changes, update every matching projection and verify them before applying. Keep unsupported interpretations as hypotheses or open questions; do not silently promote them to facts.
+Maintain a small source registry for recurring facts: stable fact ID, concise proposition, source, confidence/status, and affected entities/time/place. Attach the same `factIds` to each view node that projects that fact. In the current PORDA canvas JSON this is metadata, **not automatic shared-data synchronization**. When a fact changes, update every matching projection and verify them before applying. Keep unsupported interpretations as hypotheses or open questions; do not silently promote them to facts.
 
 ## Layout before connections
 
@@ -23,10 +23,10 @@ Maintain a small source registry for recurring facts: stable fact ID, concise pr
 2. Place time, actor, or causal stages on a consistent coordinate system. Reserve separate bands for context, evidence, and unresolved points.
 3. Keep repeated cards aligned and large enough to read. Prefer a few local links over a dense all-to-all network. A matrix or grouped cells often replaces dozens of lines.
 4. Give every edge a claim-bearing label. If a connection would cross a card or several unrelated edges, move the nodes, split the view, or encode the relation in a matrix. Avoid aesthetic connectors.
-5. Check body text wrapping, node overlap, edge crossing, and default viewport. The optional `scripts/check_layout.py SPEC.json` flags potential collisions using straight centerlines; Port Depot may render connectors differently, so inspect the actual app before calling the layout done.
+5. Check body text wrapping, node overlap, edge crossing, and default viewport. The optional `scripts/check_layout.py SPEC.json` flags potential collisions using straight centerlines; PORDA may render connectors differently, so inspect the actual app before calling the layout done.
 6. Read the project back after applying and visually inspect the overview plus representative detail views. An API response proves persistence, not legibility.
 
-File previews may render at their intrinsic aspect ratio beyond the declared node height. Leave image-to-caption clearance based on the longest actual rendered preview, then inspect it in Port Depot. Tune the saved zoom for the user's actual app window; a numerical viewport audit for a smaller standard window is a secondary signal when the user works on a larger display.
+File previews may render at their intrinsic aspect ratio beyond the declared node height. Leave image-to-caption clearance based on the longest actual rendered preview, then inspect it in PORDA. Tune the saved zoom for the user's actual app window; a numerical viewport audit for a smaller standard window is a secondary signal when the user works on a larger display.
 
 ## Preserve the viewer's information boundary
 

@@ -1,4 +1,4 @@
-# Port Depot Aesthetic Standard
+# PORDA Aesthetic Standard
 
 Use this standard for onboarding, demonstration, portfolio, and presentation-quality canvases. It converts “make it beautiful” into repeatable decisions and measurable checks.
 
@@ -48,7 +48,7 @@ Use one sans-serif family per project and at most four text sizes per canvas.
 | Caption / metadata | 11–13 px | never carry critical instructions |
 
 - Keep body text nodes at least 320 px wide. Keep primary titles 640–1100 px wide to prevent accidental wrapping.
-- Port Depot text bodies default to a 520 px `maxWidth` even when the node itself is wider. For any intended line wider than 520 px, set `style.maxWidth` explicitly to the usable node width and give the node enough height for its planned line count. Treat unplanned title wrapping as a release-blocking visual defect.
+- PORDA text bodies default to a 520 px `maxWidth` even when the node itself is wider. For any intended line wider than 520 px, set `style.maxWidth` explicitly to the usable node width and give the node enough height for its planned line count. Treat unplanned title wrapping as a release-blocking visual defect.
 - Use bold for hierarchy, not for entire paragraphs. A card should communicate one idea in a heading plus one or two short lines.
 - Use sentence case consistently. Number stages only when order matters.
 

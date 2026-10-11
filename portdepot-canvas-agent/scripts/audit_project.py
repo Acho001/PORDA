@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Audit a Port Depot project spec for deterministic aesthetic and teaching checks."""
+"""Audit a PORDA project spec for deterministic aesthetic and teaching checks."""
 
 import argparse
 import json
