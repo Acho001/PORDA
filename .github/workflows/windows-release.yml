@@ -94,4 +94,5 @@ jobs:
       - name: Attach validated installer and report to draft release
         shell: pwsh
         run: |
-          gh release upload $env:RELEASE_TAG build/output/*Setup.exe validation/Windows-validation.json --repo $env:GITHUB_REPOSITORY --clobber
+          Copy-Item validation/Windows-validation.json validation/PORDA-Windows-validation.json
+          gh release upload $env:RELEASE_TAG build/output/*Setup.exe validation/PORDA-Windows-validation.json --repo $env:GITHUB_REPOSITORY --clobber
