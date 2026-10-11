@@ -17,7 +17,7 @@ PORDA 原名 Port Depot。新版沿用原有数据目录与应用身份，升级
 
 ## 下载
 
-前往 [最新版 Release](https://github.com/Acho001/port-depot-preview/releases/tag/v0.5.3-porda)：
+前往 [最新版 Release](https://github.com/Acho001/PORDA/releases/tag/v0.5.3-porda)：
 
 | 文件 | 用途 |
 | --- | --- |
@@ -40,7 +40,7 @@ PORDA 原名 Port Depot。新版沿用原有数据目录与应用身份，升级
 
 ## 验证范围
 
-macOS 最新构建通过 48 项原生回归检查和 141 个连线算法用例；本地升级核对 49 个画板和 193 个原有文件，项目与素材保持完整。Windows [47 项原生检查](https://github.com/Acho001/port-depot-preview/actions/runs/38141320642)通过，验证在 Windows Server 2022 x64 上运行，覆盖真实离线安装、中文路径、原生剪贴板、移动及撤销、画板交互、旧版升级与保留数据的卸载，具体结果见本版报告；这不代表覆盖每台 Windows 10/11 设备。
+macOS 最新构建通过 48 项原生回归检查和 141 个连线算法用例；本地升级核对 49 个画板和 193 个原有文件，项目与素材保持完整。Windows [47 项原生检查](https://github.com/Acho001/PORDA/actions/runs/38141320642)通过，验证在 Windows Server 2022 x64 上运行，覆盖真实离线安装、中文路径、原生剪贴板、移动及撤销、画板交互、旧版升级与保留数据的卸载，具体结果见本版报告；这不代表覆盖每台 Windows 10/11 设备。
 
 ## 配套 Skill
 
@@ -49,7 +49,7 @@ macOS 最新构建通过 48 项原生回归检查和 141 个连线算法用例�
 ## 公开发行范围与许可
 
 
-PORDA 采用 [PolyForm Noncommercial License 1.0.0](LICENSE)：**非商业用途免费使用；不在许可证允许范围内的商业用途，须事先取得权利人的单独授权。** 商业授权事宜请通过 [GitHub Issues](https://github.com/Acho001/port-depot-preview/issues) 联系维护者。具体允许用途、复制、修改、分发及免责声明以英文许可证原文为准。
+PORDA 采用 [PolyForm Noncommercial License 1.0.0](LICENSE)：**非商业用途免费使用；不在许可证允许范围内的商业用途，须事先取得权利人的单独授权。** 商业授权事宜请通过 [GitHub Issues](https://github.com/Acho001/PORDA/issues) 联系维护者。具体允许用途、复制、修改、分发及免责声明以英文许可证原文为准。
 
 本许可适用于本仓库的项目自有文件、当前主分支的 [PORDA Canvas Agent Skill](portdepot-canvas-agent/LICENSE)，以及自本次许可声明起提供的 PORDA 应用二进制发行物。本仓库提供 Windows 和 macOS 测试安装包，尚未公开应用源代码。第三方组件仍按各自的许可证授权；用户自己的项目、素材和导出内容不因使用本应用而适用本许可证。
 
@@ -80,20 +80,20 @@ This update adds rounded orthogonal connectors, target arrows and four connectio
 
 The native system clipboard remains authoritative: copied nodes are real files; copied text replaces old file references; external file drops move the original file, and undo restores it. Sharing a folder path copies text locally and requires the recipient to have access to that directory.
 
-Download the current Windows installer, macOS ZIP, Skill, platform guides, validation reports and checksums from the [v0.5.3 Release](https://github.com/Acho001/port-depot-preview/releases/tag/v0.5.3-porda). The assets contain onboarding content only, with no personal projects, uploads or account configuration.
+Download the current Windows installer, macOS ZIP, Skill, platform guides, validation reports and checksums from the [v0.5.3 Release](https://github.com/Acho001/PORDA/releases/tag/v0.5.3-porda). The assets contain onboarding content only, with no personal projects, uploads or account configuration.
 
 **Windows**: run `PORDA-v0.5.3-Windows-x64-Setup.exe`. The offline installer needs no system Python, Node.js, external browser or administrator rights. Upgrades replace the application and remove old-name shortcuts. User data remains in `%LOCALAPPDATA%\Port Depot Data` across upgrades and standard uninstallation. Pets are excluded.
 
 **macOS**: unzip `PORDA-v0.5.3-macOS-arm64.zip` and drag **PORDA.app** to **Applications**. Quit the old application before replacing it; keep only the latest application. User data remains in `~/Library/Application Support/Port Depot`. This release supports Apple silicon on macOS 14 or later.
 
-These test builds are not Authenticode-signed or Apple-notarized. Verify their origin and SHA-256. macOS validation includes 48 native regression checks and 141 routing cases. All 47 [native Windows checks](https://github.com/Acho001/port-depot-preview/actions/runs/38141320642) passed on Windows Server 2022 x64; consult the attached report for the tested scope.
+These test builds are not Authenticode-signed or Apple-notarized. Verify their origin and SHA-256. macOS validation includes 48 native regression checks and 141 routing cases. All 47 [native Windows checks](https://github.com/Acho001/PORDA/actions/runs/38141320642) passed on Windows Server 2022 x64; consult the attached report for the tested scope.
 
 The companion Skill keeps the compatible identifier `portdepot-canvas-agent`, with PORDA names in its display and documentation.
 
 ### Public distribution scope and license
 
 
-PORDA uses the [PolyForm Noncommercial License 1.0.0](LICENSE): **noncommercial use is free; commercial purposes outside the license's permitted uses require prior, separate authorization from the rights holder.** Contact the maintainer through [GitHub Issues](https://github.com/Acho001/port-depot-preview/issues) about commercial licensing. The English license text governs permitted purposes, copying, modification, distribution, and disclaimers.
+PORDA uses the [PolyForm Noncommercial License 1.0.0](LICENSE): **noncommercial use is free; commercial purposes outside the license's permitted uses require prior, separate authorization from the rights holder.** Contact the maintainer through [GitHub Issues](https://github.com/Acho001/PORDA/issues) about commercial licensing. The English license text governs permitted purposes, copying, modification, distribution, and disclaimers.
 
 This license covers project-owned files in this repository, the [PORDA Canvas Agent Skill](portdepot-canvas-agent/LICENSE) on the current main branch, and PORDA application binaries offered from this licensing notice onward. This repository provides Windows and macOS test installers; application source code is not currently published. Third-party components retain their own licenses. Users' own projects, assets, and exports do not become subject to this license merely through use of the application.
 

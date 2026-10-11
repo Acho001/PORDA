@@ -12,7 +12,7 @@
 - macOS 明确最低系统为 14，并固定编译目标，避免开发工具默认版本高于本机系统而导致无法启动。
 - 本地更新仅保留最新版 PORDA.app，清理过时测试应用和重复入口；项目与素材继续保留。
 
-验证：macOS 48 项原生回归检查、141 个连线算法用例通过；安装包解压后签名校验通过，入门项目 10 张画板、13 个文件素材可读取。本地升级核对 49 个画板与 193 个文件，数据未变化。Windows [47 项最新原生验证](https://github.com/Acho001/port-depot-preview/actions/runs/38141320642)通过，结果见本版 Release 的 `PORDA-Windows-validation.json`；覆盖实际安装、原生文件剪贴板、移动及撤销、最新画板交互、旧版升级与卸载保留数据。Windows 验证环境为 Windows Server 2022 x64。
+验证：macOS 48 项原生回归检查、141 个连线算法用例通过；安装包解压后签名校验通过，入门项目 10 张画板、13 个文件素材可读取。本地升级核对 49 个画板与 193 个文件，数据未变化。Windows [47 项最新原生验证](https://github.com/Acho001/PORDA/actions/runs/38141320642)通过，结果见本版 Release 的 `PORDA-Windows-validation.json`；覆盖实际安装、原生文件剪贴板、移动及撤销、最新画板交互、旧版升级与卸载保留数据。Windows 验证环境为 Windows Server 2022 x64。
 
 Windows 安装器与 macOS 应用版本均为 **1.1.4**，内部构建均为 **2026.10.11.2**。本版仅发布应用二进制、入门指南、Skill、平台说明、验证报告和 SHA-256，不包含个人项目、素材、账号配置或内部构建输入。
 
@@ -33,7 +33,7 @@ English: This release renames the product to PORDA / 泊达, introduces simple r
 - Windows 原生文件拖入取得真实文件引用后再异步准备画板，避免事件结束后文件列表失效；旧导入监听不再覆盖原生移动动作。
 - Windows 保留离线 NSIS 安装、中文路径、LocalAppData 数据、端口避让、升级及卸载保留数据，继续排除宠物功能。
 
-Windows 安装器／macOS 应用版本均为 1.1.3。[Windows 原生验证](https://github.com/Acho001/port-depot-preview/actions/runs/37611386636)的 33 项检查全部通过，覆盖安装、剪贴板、原文件移动及撤销、升级和卸载，详情见 Release 的 `Windows-validation.json`；macOS 验证见 `macOS-clipboard-validation.json`，包括旧版真实按键失败的复现、新版真实按键验证及 23 项原生交互检查。Windows 验证环境为 Windows Server 2022 x64；未宣称已覆盖每台 Windows 10/11 电脑。
+Windows 安装器／macOS 应用版本均为 1.1.3。[Windows 原生验证](https://github.com/Acho001/PORDA/actions/runs/37611386636)的 33 项检查全部通过，覆盖安装、剪贴板、原文件移动及撤销、升级和卸载，详情见 Release 的 `Windows-validation.json`；macOS 验证见 `macOS-clipboard-validation.json`，包括旧版真实按键失败的复现、新版真实按键验证及 23 项原生交互检查。Windows 验证环境为 Windows Server 2022 x64；未宣称已覆盖每台 Windows 10/11 电脑。
 
 发行内容仅含应用包、入门指南、Skill、用户说明和验证报告，不含个人项目、素材或账号配置。应用及本次附带 Skill 按随附 PolyForm Noncommercial License 1.0.0 发行；历史版本随附的许可仍保留。
 

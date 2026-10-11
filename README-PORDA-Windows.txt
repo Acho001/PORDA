@@ -45,14 +45,14 @@ AI Agent 在端口变化后应读取 runtime.json，并把 url 传给 Skill 的 
 应用退出时会停止自己的后台，不会终止其他 Python 程序。
 
 发行与验证
-https://github.com/Acho001/port-depot-preview/releases
+https://github.com/Acho001/PORDA/releases
 验证范围以随包 PORDA-Windows-validation.json 为准；自动化 Windows 验证不能
 替代每一台用户电脑、每一种显示器组合和外部聊天软件的实机验收。
 许可（2026-10-01 更新）
 PORDA 采用 PolyForm Noncommercial License 1.0.0：非商业用途免费使用；
 不在许可证允许范围内的商业用途须事先取得权利人的单独授权。
-许可证：https://github.com/Acho001/port-depot-preview/blob/main/LICENSE
-商业授权联系：https://github.com/Acho001/port-depot-preview/issues
+许可证：https://github.com/Acho001/PORDA/blob/main/LICENSE
+商业授权联系：https://github.com/Acho001/PORDA/issues
 本声明适用于自许可变更起提供的应用二进制发行物和当前主分支的 Skill。
 历史 ZIP 和安装包内已按 MIT 发布的 Skill 文件继续适用其随附的 MIT 许可。
 第三方组件保留各自许可；用户自己的项目、素材和导出内容不因此受本许可约束。

@@ -33,4 +33,4 @@ PORDA · 泊达 v0.5.3 — macOS Apple 芯片本地桌面测试版
 非商业用途免费；商业用途需另行取得授权。具体条款以随附 LICENSE 为准。
 应用源代码尚未公开；第三方组件和历史发行物按其随附许可证授权。
 
-https://github.com/Acho001/port-depot-preview/releases/tag/v0.5.3-porda
+https://github.com/Acho001/PORDA/releases/tag/v0.5.3-porda
