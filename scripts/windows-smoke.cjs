@@ -284,6 +284,7 @@ async function uninstall() {
   assert(fs.statSync(currentAddress.path).isDirectory());assert.notEqual(currentAddress.path,childAddress.path);
   pass('Current hierarchy and child hierarchy share their own actual directories');
   await page.evaluate(url=>{
+    viewport={x:0,y:0,scale:1};applyViewport();
     nodes.push({id:'design-image',type:'file',kind:'image',mime:'image/png',name:'选中显示.png',url,x:560,y:50,w:180,aspect:1});
     Object.assign(nodes.find(n=>n.id==='design-a'),{x:60,y:350,w:220});
     connections.push({id:'latest-line',from:'design-a',to:'design-image',fromSide:'right',toSide:'left',labelText:'不对有问题'});
@@ -308,7 +309,12 @@ async function uninstall() {
   const labelPosition=await latestLabel.evaluate(el=>({x:parseFloat(el.style.left),y:parseFloat(el.style.top),background:getComputedStyle(el).backgroundColor,weight:getComputedStyle(el).fontWeight}));
   assert(Math.abs(labelPosition.x-geometry.mid.x)<.01 && Math.abs(labelPosition.y-geometry.mid.y)<.01);assert.equal(labelPosition.background,'rgba(0, 0, 0, 0)');assert.equal(labelPosition.weight,'400');
   assert(await page.locator('.porda-link[data-connection-id="latest-line"]').getAttribute('mask'));
-  const labelBox=await latestLabel.boundingBox();await latestLabel.dblclick();
+  const labelBox=await latestLabel.boundingBox();
+  const pointer=await latestLabel.evaluate(el=>{const r=el.getBoundingClientRect(),hit=document.elementFromPoint(r.x+r.width/2,r.y+r.height/2);return {rect:{x:r.x,y:r.y,width:r.width,height:r.height},hit:hit?.outerHTML.slice(0,250),viewport,scroll:{shell:document.querySelector('.shell').scrollTop,document:document.scrollingElement.scrollTop}};});
+  fs.writeFileSync(path.join(reportDir,'connector-label-hit.json'),JSON.stringify(pointer,null,2));
+  await page.screenshot({path:path.join(reportDir,'connector-label-before.png')});
+  assert.equal(await latestLabel.evaluate(el=>{const r=el.getBoundingClientRect();return document.elementFromPoint(r.x+r.width/2,r.y+r.height/2)===el;}),true,'Visible connector label must receive pointer events');
+  await page.mouse.dblclick(labelBox.x+labelBox.width/2,labelBox.y+labelBox.height/2);
   const latestInput=page.locator('[data-fm-link-input="latest-line"]');await latestInput.waitFor();await page.waitForTimeout(100);
   const inputBox=await latestInput.boundingBox();
   assert(Math.abs(labelBox.x+labelBox.width/2-inputBox.x-inputBox.width/2)<1);assert(Math.abs(labelBox.y+labelBox.height/2-inputBox.y-inputBox.height/2)<1);
