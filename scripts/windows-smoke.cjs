@@ -10,7 +10,7 @@ const reportDir = path.resolve('validation'); fs.mkdirSync(reportDir, { recursiv
 const checks = [], errors = [];
 const installDir = path.join(process.env.LOCALAPPDATA, 'Port Depot 安装测试 空格');
 const dataDir = path.join(process.env.LOCALAPPDATA, 'Port Depot Data');
-const installers = fs.readdirSync('build/output').filter(name => /^Port-Depot-.*-Windows-x64-Setup\.exe$/.test(name));
+const installers = fs.readdirSync('build/output').filter(name => /^(?:Port-Depot|PORDA)-.*-Windows-x64-Setup\.exe$/.test(name));
 assert.equal(installers.length, 1);
 const installer = path.resolve('build/output', installers[0]);
 const executable = path.join(installDir, 'PortDepot.exe');
@@ -23,8 +23,8 @@ async function eventually(fn, timeout = 60000) {
   while (Date.now() < until) { try { const value = await fn(); if (value) return value; } catch (error) { last = error; } await delay(200); }
   throw last || new Error('Timed out');
 }
-async function install() {
-  const proc = spawn(installer, ['/S', `/D=${installDir}`], { stdio: 'inherit' });
+async function install(packagePath = installer) {
+  const proc = spawn(packagePath, ['/S', `/D=${installDir}`], { stdio: 'inherit' });
   const exit = await new Promise((resolve, reject) => { proc.once('error', reject); proc.once('exit', resolve); });
   assert.equal(exit, 0); assert(fs.existsSync(executable));
 }
@@ -76,7 +76,7 @@ async function uninstall() {
   assert(fs.existsSync(installer));
   await install();
   pass('Native NSIS silent install into a Chinese path containing spaces');
-  const shellLink = path.join(process.env.APPDATA, 'Microsoft/Windows/Start Menu/Programs/Port Depot.lnk');
+  const shellLink = path.join(process.env.APPDATA, 'Microsoft/Windows/Start Menu/Programs/PORDA.lnk');
   assert(fs.existsSync(shellLink));
   pass('Start menu shortcut and registered uninstaller');
   const before = hashResources(path.join(installDir, 'resources'));
@@ -88,8 +88,10 @@ async function uninstall() {
   assert.equal(await page.locator('[data-settings-tab="pet"]').count(), 0);
   assert.equal(await page.locator('[data-settings-section="pet"]').count(), 0);
   pass('Sandboxed renderer and pet feature absent from the Windows UI');
+  assert.equal((await api('/api/app-info')).name, 'PORDA');
+  pass('PORDA branding retains compatible data and application identity');
   const projects = (await api('/api/projects')).projects;
-  assert(projects.some(p => p.name === 'Port Depot 入门指南'));
+  assert(projects.some(p => p.name === 'PORDA 入门指南'));
   assert(projects.every(p => ['default', '__collect__', '2148e7c010de43deb14a29dae984700c'].includes(p.id)));
   let canvases = (await api('/api/canvases')).canvases;
   const guide = canvases.filter(c => c.project === '2148e7c010de43deb14a29dae984700c');
@@ -230,6 +232,57 @@ async function uninstall() {
   await page.screenshot({ path: path.join(reportDir, 'canvas-zh-path.png') });
   await page.evaluate(()=>saveCanvasNow());
   await page.goto(endpoint.url+'/'); await page.waitForFunction(()=>document.getElementById('openSettingsBtn'));
+
+  // New canvas interactions run against the installed production package.
+  const design = (await api('/api/canvases', {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({title:'泊达 画板验收',project:projectId})})).canvas;
+  const sub = (await api('/api/canvases', {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({title:'第二层 中文空格',project:projectId,parent_id:design.id})})).canvas;
+  await page.goto(`${endpoint.url}/static/file-canvas.html?id=${design.id}`);
+  await page.waitForFunction(()=>window.__pdCanvasId && typeof pordaShareFolderAddress==='function');
+  await page.evaluate(sub=>{
+    nodes.push({id:'design-a',type:'text',text:'连接测试',x:100,y:180,w:200,h:50,style:{fontSize:28}},
+      {id:'design-b',type:'text',text:'中文换行',x:500,y:340,w:260,h:50,style:{fontSize:28}},
+      {id:'design-folder',type:'folder',title:'第二层 中文空格',canvasId:sub,x:850,y:150,w:220,h:160});
+    connections.push({id:'design-line',from:'design-a',to:'design-b'});render();saveCanvasNow();
+  },sub.id);
+  await page.waitForFunction(()=>!!document.querySelector('[data-connection-id="design-line"]'));
+  assert.equal(await page.locator('.node[data-id="design-a"] [data-porda-side]').count(),4);
+  assert((await page.locator('.porda-link[data-connection-id="design-line"]').getAttribute('d')).includes('Q'));
+  await page.evaluate(()=>selectConnection('design-line'));
+  const adjust=page.locator('.porda-segment').first();const ab=await adjust.boundingBox();
+  await page.mouse.move(ab.x+ab.width/2,ab.y+ab.height/2);await page.mouse.down();await page.mouse.move(ab.x+ab.width/2+50,ab.y+ab.height/2+40,{steps:8});await page.mouse.up();
+  assert(await page.evaluate(()=>!!connections.find(c=>c.id==='design-line').routing));
+  pass('Four-side connection ports, rounded elbow route and actual segment drag');
+  const target = await page.locator('.node[data-id="design-folder"] [data-porda-side="left"]').boundingBox();
+  const ends=await page.locator('.porda-endpoint').all();const eb=await ends[1].boundingBox();
+  await page.mouse.move(eb.x+eb.width/2,eb.y+eb.height/2);await page.mouse.down();await page.mouse.move(target.x+target.width/2,target.y+target.height/2,{steps:12});await page.mouse.up();
+  assert.equal(await page.evaluate(()=>connections.find(c=>c.id==='design-line').to),'design-folder');
+  pass('Dragging a connector endpoint reconnects to the real target node');
+  await page.locator('.node[data-id="design-b"]').dblclick();
+  const textBody=page.locator('.node[data-id="design-b"] [contenteditable="true"]');
+  await textBody.fill('泊达 · 连接灵感\n中文输入与换行测试'.replace('\\n','\n'));
+  await page.keyboard.press('Control+A');await page.locator('[data-fm-bold]').click();
+  await page.locator('[data-fm-done]').click();
+  await page.waitForFunction(()=>!document.querySelector('#fmToolToolbar'));
+  const size=await page.locator('.node[data-id="design-b"]').evaluate(el=>({h:el.offsetHeight,content:el.querySelector('[data-fm-tool-text]').scrollHeight,html:el.querySelector('[data-fm-tool-text]').innerHTML}));
+  assert(size.content<=size.h+1);assert(/<b>|font-weight/.test(size.html));
+  pass('Multiline Chinese text and selected-text formatting fit the node after finishing');
+  await page.locator('.node[data-id="design-b"]').dblclick();
+  const ime=await page.evaluate(()=>{const el=document.querySelector('.node[data-id="design-b"] [contenteditable]');el.dispatchEvent(new CompositionEvent('compositionstart',{bubbles:true}));el.dispatchEvent(new KeyboardEvent('keydown',{key:'Enter',isComposing:true,bubbles:true}));const retained=!!document.querySelector('#fmToolToolbar');el.dispatchEvent(new CompositionEvent('compositionend',{bubbles:true}));return retained;});assert(ime);
+  await page.locator('[data-fm-done]').click();
+  pass('IME confirmation keeps the text editor active');
+  await page.evaluate(async()=>{selected.clear();selected.add('design-a');await copySelectedNodes();});assert.equal(nativeClipboard().files.length,1);
+  await page.locator('.node[data-id="design-folder"]').click({button:'right'});
+  await page.locator('[data-porda-share-folder="child"]').click();
+  const childAddress=await api(`/api/canvases/${sub.id}/folder-address`);
+  await eventually(()=>nativeClipboard().text===childAddress.path);
+  assert.deepEqual(nativeClipboard(),{files:[],text:childAddress.path});assert(fs.statSync(childAddress.path).isDirectory());
+  pass('Right-click child-folder sharing copies an existing native path and replaces file clipboard');
+  await page.evaluate(()=>openCreateMenu(400,100));
+  await page.locator('#createMenu [data-porda-share-folder="current"]').click();
+  const currentAddress=await api(`/api/canvases/${design.id}/folder-address`);await eventually(()=>nativeClipboard().text===currentAddress.path);
+  assert(fs.statSync(currentAddress.path).isDirectory());assert.notEqual(currentAddress.path,childAddress.path);
+  pass('Current hierarchy and child hierarchy share their own actual directories');
+  await page.screenshot({path:path.join(reportDir,'porda-canvas.png')});
   const exported = await fetch(`${endpoint.url}/api/canvases/${guideRoot.id}/export-package`); assert(exported.ok);
   const zip = Buffer.from(await exported.arrayBuffer()); assert.equal(zip.subarray(0,2).toString(), 'PK');
   fs.writeFileSync(path.join(reportDir, 'guide-roundtrip.zip'), zip);
@@ -298,6 +351,19 @@ async function uninstall() {
   assert.equal(await (await fetch(endpoint.url + '/assets/library/' + encodeURI('旧版项目/中文画板/保留.txt'))).text(), 'legacy media');
   await close(); await uninstall();
   pass('Old storage/library layout migrates without symlink privileges, replacement or tutorial injection');
+
+  // Actual previous installer -> renamed PORDA upgrade; preferences use the same shell profile.
+  const previousDir=path.resolve('input/previous');const previousSetup=path.join(previousDir,fs.readdirSync(previousDir).find(n=>n.endsWith('Setup.exe')));
+  await install(previousSetup);await launch();
+  const oldVersion=(await api('/api/app-info')).version;assert.equal(oldVersion,'2026.10.07.2');
+  const oldProfile=await page.evaluate(()=>window.portDepot.preferences);
+  await page.locator('#openSettingsBtn').click();await page.locator('#languageSelect').selectOption('en');await page.locator('#settingsClose').click();
+  await close();await install();await launch();
+  assert.equal((await api('/api/app-info')).name,'PORDA');assert.equal((await api('/api/canvases/legacy-canvas')).canvas.id,'legacy-canvas');
+  await page.locator('#openSettingsBtn').click();assert.equal(await page.locator('#languageSelect').inputValue(),'en');await page.locator('#settingsClose').click();
+  assert(fs.existsSync(shellLink));assert(!fs.existsSync(path.join(process.env.APPDATA,'Microsoft/Windows/Start Menu/Programs/Port Depot.lnk')));
+  await close();await uninstall();
+  pass('Real v0.5.2 to PORDA upgrade preserves legacy files, language and a single renamed shortcut',{previous:oldVersion});
   assert.deepEqual(errors, []);
   pass('No uncaught renderer errors during the tested UI operations');
 })().then(() => {

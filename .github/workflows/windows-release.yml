@@ -5,7 +5,7 @@ on:
       tag:
         description: Draft release containing windows-build-input.zip
         required: true
-        default: v0.5.2-windows
+        default: v0.5.3-porda
 permissions:
   contents: write
 jobs:
@@ -30,6 +30,7 @@ jobs:
         run: |
           gh release download $env:RELEASE_TAG --repo $env:GITHUB_REPOSITORY --pattern windows-build-input.zip --dir input
           Expand-Archive input/windows-build-input.zip build
+          gh release download v0.5.2-windows --repo $env:GITHUB_REPOSITORY --pattern "*Windows-x64-Setup.exe" --dir input/previous
           Invoke-WebRequest https://github.com/electron/electron/releases/download/v44.5.1/electron-v44.5.1-win32-x64.zip -OutFile input/electron.zip
           Expand-Archive input/electron.zip build/payload -Force
           Move-Item build/payload/electron.exe build/payload/PortDepot.exe
@@ -70,7 +71,7 @@ jobs:
           if ($LASTEXITCODE -ne 0) { throw 'Build tools provisioning failed' }
           npm install --no-save rcedit@5.0.2 playwright@1.63.0 --ignore-scripts --no-audit --no-fund
           $productVersion = (Get-Content package.json -Raw | ConvertFrom-Json).version
-          & node_modules/rcedit/bin/rcedit-x64.exe ../payload/PortDepot.exe --set-icon ../payload/resources/backend/PortDepot.ico --set-file-version $productVersion --set-product-version $productVersion --set-version-string ProductName 'Port Depot' --set-version-string FileDescription 'Port Depot' --set-version-string CompanyName 'Port Depot'
+          & node_modules/rcedit/bin/rcedit-x64.exe ../payload/PortDepot.exe --set-icon ../payload/resources/backend/PortDepot.ico --set-file-version $productVersion --set-product-version $productVersion --set-version-string ProductName 'PORDA' --set-version-string FileDescription 'PORDA · 泊达' --set-version-string CompanyName 'PORDA'
           if ($LASTEXITCODE -ne 0) { throw 'Executable metadata failed' }
           npx electron-builder --prepackaged ../payload --win nsis --x64 --publish never --config electron-builder.yml
           if ($LASTEXITCODE -ne 0) { throw 'NSIS installer build failed' }
