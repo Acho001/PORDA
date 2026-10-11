@@ -267,6 +267,7 @@ async function uninstall() {
   assert(size.content<=size.h+1);assert(/<b>|font-weight/.test(size.html));
   pass('Multiline Chinese text and selected-text formatting fit the node after finishing');
   await page.locator('.node[data-id="design-b"]').dblclick();
+  await page.waitForFunction(()=>!!document.querySelector('#fmToolToolbar'));
   const ime=await page.evaluate(()=>{const el=document.querySelector('.node[data-id="design-b"] [contenteditable]');el.dispatchEvent(new CompositionEvent('compositionstart',{bubbles:true}));el.dispatchEvent(new KeyboardEvent('keydown',{key:'Enter',isComposing:true,bubbles:true}));const retained=!!document.querySelector('#fmToolToolbar');el.dispatchEvent(new CompositionEvent('compositionend',{bubbles:true}));return retained;});assert(ime);
   await page.locator('[data-fm-done]').click();
   pass('IME confirmation keeps the text editor active');
