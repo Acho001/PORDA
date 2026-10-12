@@ -1,36 +1,17 @@
-PORDA · 泊达 v0.5.3 — macOS Apple 芯片本地桌面测试版
-内部构建：2026.10.11.2 / 应用版本：1.1.4
+PORDA · 泊达 — macOS 2026.10.13.1
 
-适用：macOS 14 或更高版本，Apple silicon（M 系列）。不提供 Intel 版本。
+适用于 Apple Silicon（M 系列芯片），macOS 14 或更新系统。本包不包含 Intel 版本。
 
-安装与升级
-1. 下载 PORDA-v0.5.3-macOS-arm64.zip 并解压，得到 PORDA.app。
-2. 先退出正在运行的旧版，再将 PORDA.app 拖入 Applications（应用程序），替换现有应用。
-3. 仅保留一个最新版 PORDA.app；删除旧测试应用和旧名称快捷方式。
-4. 从 Applications 启动 PORDA。
+安装：退出正在运行的 PORDA，打开 DMG，将 PORDA.app 拖到“应用程序”。已有版本时选择替换，仅保留 /Applications/PORDA.app 一个安装入口。
+原应用 ID 与用户数据目录保持兼容；替换应用无需删除项目或文件。
 
-数据始终保存在 ~/Library/Application Support/Port Depot。
-该目录名为兼容旧版保留，升级、删除旧应用及标准卸载均不应删除项目和素材。
-备份时完整复制数据目录。不要将项目存储在应用包内部。
+这是本地 ad-hoc 签名安装包，未进行 Developer ID 签名或 Apple 公证。若系统阻止打开，请在系统设置“隐私与安全性”中针对 PORDA 允许打开。
 
-本版画板
-- 圆角折线、四方向端点、箭头和折线拖动；连线文字位于路径长度中点。
-- 编辑连线文字时位置保持一致，画板不会因输入框获得焦点而滚动。
-- 图片取消外框与标题栏；仅选中时在右上方显示文件名，双击文件名可重命名真实文件。
-- 优化中文输入、换行、文字格式和内容尺寸。
-- 右键复制当前层级或子文件夹的实际本地目录地址；不会上传项目。
+本次更新：修复复制粘贴快捷键；按 T 后点击画板插入文字；已有连线文字可点击修改；修复采集港文件拖入画板。
+安装包已通过完整性、版本、部署目标、包内后端与交互、系统启动检查；完整验收范围见随包说明。
 
-原生文件操作
-- ⌘C / ⌘V 和原生编辑菜单使用系统剪贴板。
-- 复制节点提供真实文件，可粘贴到访达或其他支持文件粘贴的位置。
-- 复制选中文字或输入框内容会替换旧文件剪贴板。
-- 外部普通文件拖入画板会实际移动到画板目录，⌘Z 可恢复原位置。
+程序／应用版本：1.1.6。公开测试版，许可按随附 LICENSE 和第三方组件各自条款执行。
 
-验证与许可
-48 项原生回归检查和 141 个连线算法用例通过，详见 PORDA-macOS-validation.json。
-此测试应用使用临时签名，未使用 Apple Developer ID 签名或公证。
-请核对本仓库 Release 来源与 SHA256SUMS-PORDA.txt，并按系统提示首次打开。
-非商业用途免费；商业用途需另行取得授权。具体条款以随附 LICENSE 为准。
-应用源代码尚未公开；第三方组件和历史发行物按其随附许可证授权。
+English: Open the arm64 DMG and drag PORDA.app into Applications after quitting the previous application. Requires Apple silicon and macOS 14+. User data remains in ~/Library/Application Support/Port Depot. This release fixes clipboard shortcuts, adds T annotations, enables editing existing connector labels and fixes collection drag. Package/interaction and Launch Services checks passed; native packaged-window visual automation was not completed. Ad-hoc signed, not notarized. See the attached validation scope and SHA256SUMS.txt.
 
-https://github.com/Acho001/PORDA/releases/tag/v0.5.3-porda
+https://github.com/Acho001/PORDA/releases/tag/v2026.10.13.1

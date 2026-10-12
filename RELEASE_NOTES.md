@@ -1,3 +1,41 @@
+# PORDA · 泊达 2026.10.13.1
+
+macOS 和 Windows 安装包在本发行页一同提供。程序／安装器版本为 **1.1.6**，内部构建为 **2026.10.13.1**。本版继续作为公开测试版发行。
+
+- 修复复制粘贴快捷键冲突。文件使用系统文件剪贴板，文字输入使用普通文字复制；后复制的文字会替换先复制的文件，待处理的文件复制不会覆盖新文字。
+- 新增 **T** 文本工具：按 T 后点击画板插入纯文字注释，Esc 退出；编辑中输入 T 和中文输入法组合输入不会误触工具。
+- 已有连接线文字可单击修改；Enter 或失焦保存，Esc 取消，撤销可恢复；几何重绘不替换正在编辑的输入框。
+- 修复采集港弹窗拖入画板。原文件移动到画板目录，采集港原位置和条目同步移除。
+- 明确文件和注释分别复制。文字注释保持为画板内容；删除空间组解除分组并保留文件；文件节点的删除操作作用于源文件。
+- 保留圆角连接线、路径中点文字、图片选中时的文件名及右键分享本地目录地址。Windows 排除宠物功能；应用身份和数据目录保持兼容。
+
+## 下载
+
+- **Windows x64**：`PORDA-2026.10.13.1-Windows-x64-Setup.exe`
+- **macOS 14+ / Apple Silicon**：`PORDA-2026.10.13.1-macOS-arm64.dmg`
+- 安装说明、验证报告、许可、产物清单和 `SHA256SUMS.txt` 一同提供。
+
+## 本版验证
+
+Windows 11 x64 实机 22 项新版检查通过，覆盖安装、独立运行、中文路径、原生文件／文字／图片剪贴板、真实文件移动与撤销、T 工具、连线文字修改、采集港拖入、重启保存及关闭退出。使用独立测试目录，个人数据校验一致；外部拖入验证采用真实磁盘文件与原生拖拽载荷。
+
+macOS 19 项包内检查通过，其中包含针对包内实际后端和资源的 12 项交互检查；同版源码的 13 项原生菜单／剪贴板检查通过。最低系统、签名完整性、入门资源和 Launch Services 启动已核对。
+
+本版未测试 Windows 跨版升级、卸载、手动 Explorer 操作与原生截图／裁剪；macOS 包原生窗口自动视觉检查未完成。完整范围见 `PORDA-Installation-and-Validation.md` 和对应 JSON 报告。旧版结果不作为本版验证结论。
+
+macOS 采用本地 ad-hoc 签名，未做 Apple 公证；Windows 未做 Authenticode 签名。仅发布安装包、说明、校验值与许可，不含应用私有源码、内部构建输入、个人项目或凭据。许可按随附 `LICENSE` 和第三方组件各自的条款执行。
+
+## English
+
+Both **macOS arm64 DMG** and **Windows x64 Setup.exe** are provided in this release. Build: **2026.10.13.1**; application/installer version: **1.1.6**. This remains a public test release.
+
+The update fixes clipboard shortcuts and stale file-copy races, adds the T annotation tool, enables single-click editing of existing connector labels with Enter/blur save and Escape cancel, and fixes collection-popup drag as an actual file move. Notes remain annotations and copy as plain text; files and notes are copied separately. Spatial-group deletion keeps files. Stable app IDs and data directories are retained; Windows pets remain excluded.
+
+All 22 current-version native Windows checks passed on Windows 11 x64. macOS passed 19 package checks, including 12 packaged-backend interactions, and 13 native clipboard/menu checks on the same source revision. Launch Services startup passed. Windows cross-version upgrade/uninstall, manual Explorer gestures and screenshot/cropping, and macOS native packaged-window visual automation were not verified for this release. See attached reports for scope and SHA-256 for download integrity. The Windows installer is unsigned; the macOS app is ad-hoc signed and not notarized. Private application source and personal projects are excluded.
+
+
+---
+
 # PORDA · 泊达 v0.5.3 · 2026.10.11.2 · 2026-10-11
 
 - 产品正式更名为 **PORDA**，中文名称 **泊达**；安装包、窗口、快捷方式、平台说明和下载文件使用新名称，沿用兼容的应用身份与数据目录。

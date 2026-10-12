@@ -1,50 +1,51 @@
 # PORDA · 泊达
 
-完全本地的无限画板文件管理与创意采集工作台。
+本地无限画板文件管理与采集工作台。文件和文件夹是真实磁盘对象，画板保存它们的显示位置、文字注释、分组和连线。
 
-**公开测试版 v0.5.3 · 构建 2026.10.11.2 · Windows 10/11 x64 · macOS 14+ Apple 芯片**
+**公开测试版 2026.10.13.1 · 应用／安装器版本 1.1.6 · Windows x64 · macOS 14+ Apple 芯片**
 
-PORDA 原名 Port Depot。新版沿用原有数据目录与应用身份，升级保留项目、素材和设置。
+PORDA 原名 Port Depot，沿用原应用身份和用户数据目录。
 
 ## 本版更新
 
-- 节点连接线采用圆角折线，支持四个方向的端点、箭头、重新连接和折线拖动。
-- 连线文字位于路径长度的中点，线条在文字处留出透明间隔；进入编辑时位置保持一致，画板不会因输入框获得焦点而滚动。
-- 图片节点取消外框和标题栏，完整显示图片；文件名仅在选中时显示在右上方，双击文件名可重命名真实文件。
-- 优化中文输入、换行、文字格式及输入后的节点尺寸。
-- 右键分享当前层级或子文件夹的实际本地地址。接收方需要能访问同一目录，该操作不会上传项目。
-- 保留系统原生文件复制：节点复制提供真实文件，文字复制覆盖旧文件剪贴板；外部文件拖入实际移动原文件，撤销恢复文件和画板显示。
+- 修复复制粘贴快捷键冲突：文件复制使用系统文件剪贴板；在输入框复制文字会替换旧文件内容，待处理的文件复制不能覆盖后来的文字复制。
+- 按 **T** 启用文本工具，点击画板插入纯文字注释；**Esc** 退出。编辑文字和输入法组合输入不会误触工具。
+- 已有连线文字可单击修改，**Enter** 或失焦保存，**Esc** 取消；连线重绘时保留输入焦点。
+- 修复采集港弹窗文件拖入画板：真实文件移动到目标目录，原采集条目随之移除。
+- 项目对应真实一级文件夹。文字注释保持为画板内容；复制注释使用普通文本。文件与注释同时选中时需分别复制。
+- 组是空间集合，删除组解除分组并保留其中的文件。文件节点的删除按钮、菜单和键盘入口操作源文件。
+- 保留圆角连接线、路径中点文字、选中时显示图片文件名，以及右键分享真实文件夹地址。Windows 包继续排除宠物。
 
-## 下载
+## 下载与安装
 
-前往 [最新版 Release](https://github.com/Acho001/PORDA/releases/tag/v0.5.3-porda)：
+前往 [2026.10.13.1 Release](https://github.com/Acho001/PORDA/releases/tag/v2026.10.13.1)，两种平台安装包在同一发行页：
 
 | 文件 | 用途 |
 | --- | --- |
-| `PORDA-v0.5.3-Windows-x64-Setup.exe` | Windows 离线安装包 |
-| `PORDA-v0.5.3-macOS-arm64.zip` | macOS 应用包，内含 PORDA.app |
-| `PORDA-Canvas-Agent-Skill-v0.5.3.zip` | 可安装的画板自动化 Skill |
-| `README-PORDA-Windows.txt` / `README-PORDA-macOS.txt` | 平台安装与操作说明 |
-| `PORDA-Windows-validation.json` / `PORDA-macOS-validation.json` | 当前构建验证报告 |
-| `SHA256SUMS-PORDA.txt` | 下载文件校验值 |
+| `PORDA-2026.10.13.1-Windows-x64-Setup.exe` | Windows x64 离线安装包 |
+| `PORDA-2026.10.13.1-macOS-arm64.dmg` | macOS 14+ Apple Silicon 拖拽安装包 |
+| `README-PORDA-Windows.txt` / `README-PORDA-macOS.txt` | 平台操作说明 |
+| `PORDA-Installation-and-Validation.md` | 验证范围与未测项目 |
+| `PORDA-Windows-validation.json` / `PORDA-macOS-validation.json` | 本次验证报告 |
+| `PORDA-Release-Manifest.json` / `SHA256SUMS.txt` | 版本与校验值 |
 
-完整变化见 [PORDA 更新记录](RELEASE_NOTES.md)。发行内容仅包含应用、入门指南、Skill 和说明，不包含个人项目、上传素材或账号配置。
+**Windows**：运行 Setup.exe，从桌面或开始菜单打开 PORDA。离线包自带运行时，无需系统 Python、Node.js 或外部浏览器。项目与素材位于 `%LOCALAPPDATA%\Port Depot Data`，替换程序无需删除该目录。详见 [Windows 说明](README-PORDA-Windows.txt)。
 
-## 安装与升级
+**macOS**：打开 DMG，退出正在运行的 PORDA，将 **PORDA.app** 拖入“应用程序”，已有版本时替换。仅保留一个最新版应用入口。数据目录 `~/Library/Application Support/Port Depot` 保持兼容，不要删除该目录来更新程序。详见 [macOS 说明](README-PORDA-macOS.txt)。
 
-**Windows**：双击 Setup.exe，选择语言和安装目录，从桌面或开始菜单打开 **PORDA**。无需系统 Python、Node.js、外部浏览器、压缩软件或管理员权限。升级会替换现有应用并清理旧名称快捷方式；项目保存在 `%LOCALAPPDATA%\Port Depot Data`，升级及标准卸载保留这些数据。Windows 版暂不提供宠物功能。详见 [PORDA Windows 说明](README-PORDA-Windows.txt)。
+这些测试发行物未使用 Windows Authenticode 或 Apple Developer ID 签名／公证；校验值和安装步骤见对应说明。
 
-**macOS**：解压 ZIP，得到 **PORDA.app**，将它拖入 **Applications（应用程序）**。更新时先退出应用，再替换现有 PORDA.app；仅保留最新版，不保留旧测试应用或重复快捷方式。项目仍位于 `~/Library/Application Support/Port Depot`，删除旧应用不会删除该目录。详见 [PORDA macOS 说明](README-PORDA-macOS.txt)。
+## 操作与验证范围
 
-测试发行物尚未使用 Windows Authenticode 或 Apple Developer ID 签名／公证；请核对 Release 来源与 SHA-256，并按系统提示首次打开。
+复制文件使用系统原生文件剪贴板；在输入框复制使用普通文字。画板注释粘贴不创建 TXT。外部文件拖入移动原件，撤销恢复文件与画板显示；文件选择器导入执行复制。导出包包含真实文件与画板 JSON；导入 ZIP 后保留原 ZIP。
 
-## 验证范围
+Windows 11 x64 实机 **22 项新版检查通过**，覆盖安装、独立运行、中文路径、原生文件和文字剪贴板、图片剪贴板、真实文件移动及撤销、T 工具、连线编辑、采集港拖入、重启保存和关闭退出。测试使用隔离目录，现有个人数据校验一致。外部拖入使用真实磁盘文件与原生拖拽载荷；手动 Explorer 操作、原生截图、跨版升级及卸载未在本版测试。不能把旧版的测试结果当作本版结果。
 
-macOS 最新构建通过 48 项原生回归检查和 141 个连线算法用例；本地升级核对 49 个画板和 193 个原有文件，项目与素材保持完整。Windows [47 项原生检查](https://github.com/Acho001/PORDA/actions/runs/38141320642)通过，验证在 Windows Server 2022 x64 上运行，覆盖真实离线安装、中文路径、原生剪贴板、移动及撤销、画板交互、旧版升级与保留数据的卸载，具体结果见本版报告；这不代表覆盖每台 Windows 10/11 设备。
+macOS 包 **19 项检查通过**，包含实际包内后端与静态文件的 **12 项交互检查**；同版源码另通过 **13 项原生剪贴板／菜单检查**。最低系统、签名完整性和 Launch Services 启动已核对。安装包原生窗口的自动视觉检查未完成，完整范围见 [安装与验收说明](PORDA-Installation-and-Validation.md)。
 
-## 配套 Skill
+变化见 [PORDA 更新记录](RELEASE_NOTES.md)。公开发行内容仅包含安装包、校验值、许可和用户说明；不发布私有应用源码、构建输入或个人项目。
 
-下载名称使用 PORDA；Skill 的标识仍为 `portdepot-canvas-agent`，已有调用继续有效。它通过应用的实时 API 创建、编辑和检查画板项目，接口与系统文件操作兼容。[Skill 说明](portdepot-canvas-agent/SKILL.md)
+现有配套 Skill 保留标识 `portdepot-canvas-agent`，可按 [Skill 说明](portdepot-canvas-agent/SKILL.md) 使用。本次未另行发布 Skill 安装包。
 
 ## 公开发行范围与许可
 
@@ -68,27 +69,22 @@ PolyForm Noncommercial 是限制商业用途的源码可见许可证，不属于
 以上登记信息由项目维护者提供；具体认证文件及范围以认证证书和对应原始文件为准。本记录作为软件材料的存证说明，使用授权仍按上述许可证执行。
 
 
+
 ---
 
 ## English
 
-**PORDA** is a local infinite-canvas file manager and creative collection workspace, formerly named Port Depot.
+**PORDA / 泊达** is a local infinite-canvas file manager and collection workspace, formerly Port Depot. Files are real filesystem objects; canvas JSON stores their presentation, notes, spatial groups and connections.
 
-**Public test release v0.5.3 · build 2026.10.11.2 · Windows 10/11 x64 · macOS 14+ Apple silicon**
+**Public test release 2026.10.13.1 · application/installer version 1.1.6 · Windows x64 · macOS 14+ Apple silicon**
 
-This update adds rounded orthogonal connectors, target arrows and four connection sides; labels follow the half-length point of the route and retain their position during editing. Images appear without card chrome, with their filename above the top-right corner only while selected. Chinese input, multiline text and formatting are improved. Context menus can copy the actual current or child-folder path.
+This update fixes clipboard shortcut conflicts, adds the **T** text tool, makes existing connector labels editable with a single click, and fixes collection-popup drag into the canvas. Files use the native system file clipboard; newer copied text replaces old file references. Notes copy as plain text and paste as annotations without creating TXT files. Files and notes must be copied separately. External file drops move the originals; undo restores them. Deleting a spatial group keeps its files. Windows excludes pets.
 
-The native system clipboard remains authoritative: copied nodes are real files; copied text replaces old file references; external file drops move the original file, and undo restores it. Sharing a folder path copies text locally and requires the recipient to have access to that directory.
+Get both platform installers, guides, validation reports and SHA-256 values from the [2026.10.13.1 Release](https://github.com/Acho001/PORDA/releases/tag/v2026.10.13.1). **Windows**: run the x64 Setup.exe; no system Python, Node.js or external browser is required. User data stays in `%LOCALAPPDATA%\Port Depot Data`. **macOS**: open the arm64 DMG and drag PORDA.app into Applications, replacing the old application after quitting it. Data stays in `~/Library/Application Support/Port Depot`.
 
-Download the current Windows installer, macOS ZIP, Skill, platform guides, validation reports and checksums from the [v0.5.3 Release](https://github.com/Acho001/PORDA/releases/tag/v0.5.3-porda). The assets contain onboarding content only, with no personal projects, uploads or account configuration.
+All **22 current-version native Windows checks** passed on Windows 11 x64. They cover installation, Unicode paths, native file/text/bitmap clipboard, real move/undo, collection drag, text tools, connector editing, restart persistence and shutdown of the owned backend. Manual Explorer gestures, screenshot/cropping, cross-version upgrades and uninstallation were not tested for this release. macOS passed **19 package checks**, including **12 packaged-backend interaction checks**, plus **13 native clipboard/menu checks** on the same source revision. Launch Services startup passed; native packaged-window visual automation was not completed. Consult the attached scope report; these results do not cover every device or application.
 
-**Windows**: run `PORDA-v0.5.3-Windows-x64-Setup.exe`. The offline installer needs no system Python, Node.js, external browser or administrator rights. Upgrades replace the application and remove old-name shortcuts. User data remains in `%LOCALAPPDATA%\Port Depot Data` across upgrades and standard uninstallation. Pets are excluded.
-
-**macOS**: unzip `PORDA-v0.5.3-macOS-arm64.zip` and drag **PORDA.app** to **Applications**. Quit the old application before replacing it; keep only the latest application. User data remains in `~/Library/Application Support/Port Depot`. This release supports Apple silicon on macOS 14 or later.
-
-These test builds are not Authenticode-signed or Apple-notarized. Verify their origin and SHA-256. macOS validation includes 48 native regression checks and 141 routing cases. All 47 [native Windows checks](https://github.com/Acho001/PORDA/actions/runs/38141320642) passed on Windows Server 2022 x64; consult the attached report for the tested scope.
-
-The companion Skill keeps the compatible identifier `portdepot-canvas-agent`, with PORDA names in its display and documentation.
+These test builds are not Authenticode-signed or Apple-notarized; the macOS app is ad-hoc signed. Verify the release origin and SHA-256. The public repository distributes installers and documentation without private application source, build inputs or personal projects.
 
 ### Public distribution scope and license
 
