@@ -1,3 +1,30 @@
+# PORDA · 泊达 2026.11.02.1 — macOS 格式转换与目录同步
+
+本次仅发布 macOS Apple Silicon 安装包，最低 macOS 14，应用版本 1.1.7。Windows 保持 [2026.10.13.1](https://github.com/Acho001/PORDA/releases/tag/v2026.10.13.1)。
+
+- 新增文件右键“格式转换”及可搜索的目标格式弹窗；按本地引擎能力显示选项。
+- 自带 Filee 2.2.0 CLI 运行环境及兼容 macOS 14 的官方 7-Zip 26.05，无需另装 Filee GUI、Python 或 .NET。
+- 转换在本地执行，保留原件，输出真实文件到同一画板目录；重名不覆盖，支持撤销。
+- 新增独立圆形文件夹同步按钮，位于原有四按钮左侧；先保存编辑，再同步外部新增、改名、修改与删除。
+- 同步保留布局、批注和空间集合；自动图片尺寸和磁盘元数据不会误阻止文件撤销。
+- 优化转换弹窗的浅色/深色主题、搜索、快捷键隔离与窄屏布局。
+
+139.3 MB 的 Mac 包包含自包含转换运行环境，因此大于上一版。没有额外打包 FFmpeg、LibreOffice 等大型可选引擎，不能据上游格式总数推定本包全部支持。
+
+验证：49 项源码文件回归、28 项包内检查、12 项既有包内交互回归、新转换/同步界面检查、PNG→JPG/PDF、Markdown→HTML、ZIP→7Z 及正常 Launch Services 启动通过。最低系统声明与组件部署目标已核对，未在 macOS 14 实机运行；未穷举格式，未重测原生窗口视觉操作、Finder 手势、截图及原生系统剪贴板。详见随附验证范围。
+
+安装：退出 PORDA，打开 DMG，将 PORDA.app 拖入“应用程序”并替换原版。保留用户数据目录。ad-hoc 签名，未 Apple 公证。
+
+下载：[Mac Release](https://github.com/Acho001/PORDA/releases/tag/v2026.11.02.1)。核对随附 SHA256SUMS.txt。
+
+## English
+
+Mac-only update: a file context-menu conversion dialog powered by bundled Filee 2.2.0, and a standalone circular folder-sync button next to the four existing actions. Conversion creates real files beside the original, preserves originals, avoids overwrites and supports undo. Sync saves current edits first, then reconciles the physical directory while keeping layout and annotations. Includes a compatible official 7-Zip 26.05. Optional large engines are not bundled. Windows remains on the previous release.
+
+Requires Apple silicon and macOS 14+. App version 1.1.7; ad-hoc signed, not notarized. The self-contained conversion runtime increases the Mac DMG to 139.3 MB. See the attached validation scope and checksums before installation.
+
+---
+
 # PORDA · 泊达 2026.10.13.1
 
 macOS 和 Windows 安装包在本发行页一同提供。程序／安装器版本为 **1.1.6**，内部构建为 **2026.10.13.1**。本版继续作为公开测试版发行。

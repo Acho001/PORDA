@@ -1,51 +1,43 @@
 # PORDA · 泊达
 
-本地无限画板文件管理与采集工作台。文件和文件夹是真实磁盘对象，画板保存它们的显示位置、文字注释、分组和连线。
+本地无限画板文件管理与采集工作台。文件和文件夹是真实磁盘对象，画板保存它们的显示位置、文字注释、空间分组和连线。
 
-**公开测试版 2026.10.13.1 · 应用／安装器版本 1.1.6 · Windows x64 · macOS 14+ Apple 芯片**
+**macOS 最新公开测试版 2026.11.02.1 · 应用版本 1.1.7 · macOS 14+ Apple 芯片**
+
+Windows 保持 **2026.10.13.1 / 1.1.6**；本次仅发布 macOS，不更新 Windows 包。
 
 PORDA 原名 Port Depot，沿用原应用身份和用户数据目录。
 
 ## 本版更新
 
-- 修复复制粘贴快捷键冲突：文件复制使用系统文件剪贴板；在输入框复制文字会替换旧文件内容，待处理的文件复制不能覆盖后来的文字复制。
-- 按 **T** 启用文本工具，点击画板插入纯文字注释；**Esc** 退出。编辑文字和输入法组合输入不会误触工具。
-- 已有连线文字可单击修改，**Enter** 或失焦保存，**Esc** 取消；连线重绘时保留输入焦点。
-- 修复采集港弹窗文件拖入画板：真实文件移动到目标目录，原采集条目随之移除。
-- 项目对应真实一级文件夹。文字注释保持为画板内容；复制注释使用普通文本。文件与注释同时选中时需分别复制。
-- 组是空间集合，删除组解除分组并保留其中的文件。文件节点的删除按钮、菜单和键盘入口操作源文件。
-- 保留圆角连接线、路径中点文字、选中时显示图片文件名，以及右键分享真实文件夹地址。Windows 包继续排除宠物。
+- 文件节点右键新增 **格式转换**。二级弹窗按当前文件和本地可用引擎列出目标格式，支持搜索。转换生成真实文件，保留原件；重名不覆盖，支持文件撤销。
+- 集成 Filee 2.2.0 命令行及自包含运行环境，安装后无需另外安装 Filee GUI、Python 或 .NET。附带兼容 macOS 14 的官方 7-Zip 26.05。
+- 右上四个操作按钮左侧新增 **独立圆形刷新同步按钮**。先保存当前编辑，再扫描真实文件夹，同步新增、改名、修改与删除，保留仍存在节点的位置、批注和分组。
+- 转换弹窗隔离画板快捷键；媒体自动尺寸和磁盘元数据不再被误判为阻止文件撤销的后续编辑。
+- 继续保留截图采集、采集港暂存与拖放调度、T 文本工具、可编辑连线文字和系统文件复制粘贴。
+
+转换能力由包内及本机实际可用引擎决定，并非所有上游格式都能在此包中转换。未额外打包 FFmpeg、LibreOffice 等大型可选引擎。新增的转换运行环境使 Mac 包体积高于上一版。
 
 ## 下载与安装
 
-前往 [2026.10.13.1 Release](https://github.com/Acho001/PORDA/releases/tag/v2026.10.13.1)，两种平台安装包在同一发行页：
-
-| 文件 | 用途 |
+| 平台 | 下载 |
 | --- | --- |
-| `PORDA-2026.10.13.1-Windows-x64-Setup.exe` | Windows x64 离线安装包 |
-| `PORDA-2026.10.13.1-macOS-arm64.dmg` | macOS 14+ Apple Silicon 拖拽安装包 |
-| `README-PORDA-Windows.txt` / `README-PORDA-macOS.txt` | 平台操作说明 |
-| `PORDA-Installation-and-Validation.md` | 验证范围与未测项目 |
-| `PORDA-Windows-validation.json` / `PORDA-macOS-validation.json` | 本次验证报告 |
-| `PORDA-Release-Manifest.json` / `SHA256SUMS.txt` | 版本与校验值 |
+| macOS 14+ Apple Silicon（本次更新） | [2026.11.02.1 Mac Release](https://github.com/Acho001/PORDA/releases/tag/v2026.11.02.1) · `PORDA-2026.11.02.1-macOS-arm64.dmg` |
+| Windows x64（保持原版） | [2026.10.13.1 Windows Release](https://github.com/Acho001/PORDA/releases/tag/v2026.10.13.1) · `PORDA-2026.10.13.1-Windows-x64-Setup.exe` |
 
-**Windows**：运行 Setup.exe，从桌面或开始菜单打开 PORDA。离线包自带运行时，无需系统 Python、Node.js 或外部浏览器。项目与素材位于 `%LOCALAPPDATA%\Port Depot Data`，替换程序无需删除该目录。详见 [Windows 说明](README-PORDA-Windows.txt)。
+macOS：退出正在运行的 PORDA，打开 DMG，将 **PORDA.app** 拖入“应用程序”并替换原版本。仅保留一个最新版应用入口。数据继续位于 `~/Library/Application Support/Port Depot`，更新时不要删除该目录。详见 [macOS 说明](README-PORDA-macOS.txt)。
 
-**macOS**：打开 DMG，退出正在运行的 PORDA，将 **PORDA.app** 拖入“应用程序”，已有版本时替换。仅保留一个最新版应用入口。数据目录 `~/Library/Application Support/Port Depot` 保持兼容，不要删除该目录来更新程序。详见 [macOS 说明](README-PORDA-macOS.txt)。
-
-这些测试发行物未使用 Windows Authenticode 或 Apple Developer ID 签名／公证；校验值和安装步骤见对应说明。
+本次 Mac 包为本地 ad-hoc 签名，未进行 Apple Developer ID 签名或公证。请核对发布来源及 SHA256SUMS.txt；系统阻止打开时，可在系统设置“隐私与安全性”中针对 PORDA 允许打开。
 
 ## 操作与验证范围
 
-复制文件使用系统原生文件剪贴板；在输入框复制使用普通文字。画板注释粘贴不创建 TXT。外部文件拖入移动原件，撤销恢复文件与画板显示；文件选择器导入执行复制。导出包包含真实文件与画板 JSON；导入 ZIP 后保留原 ZIP。
+文件复制粘贴使用系统原生文件体系。外部文件拖入移动原件，文件选择器导入执行复制。纯文字注释保存在画板，不生成 TXT；组是空间集合，删除组保留文件。文件节点删除操作真实源文件。导出包包含真实文件与画板 JSON；导入 ZIP 后保留原 ZIP。
 
-Windows 11 x64 实机 **22 项新版检查通过**，覆盖安装、独立运行、中文路径、原生文件和文字剪贴板、图片剪贴板、真实文件移动及撤销、T 工具、连线编辑、采集港拖入、重启保存和关闭退出。测试使用隔离目录，现有个人数据校验一致。外部拖入使用真实磁盘文件与原生拖拽载荷；手动 Explorer 操作、原生截图、跨版升级及卸载未在本版测试。不能把旧版的测试结果当作本版结果。
+本次完成 **49 项源码文件回归**和 **28 项 Mac 安装包检查**，包含原有 **12 项包内交互回归**，以及实际包内 Filee 的 PNG→JPG/PDF、Markdown→HTML、ZIP→7Z。右键弹窗、转换撤销、手动目录同步、未保存批注保护、弹窗快捷键和宽窄屏布局已在实际包内后端验证。包内引擎不依赖开发机的 Filee 安装。
 
-macOS 包 **19 项检查通过**，包含实际包内后端与静态文件的 **12 项交互检查**；同版源码另通过 **13 项原生剪贴板／菜单检查**。最低系统、签名完整性和 Launch Services 启动已核对。安装包原生窗口的自动视觉检查未完成，完整范围见 [安装与验收说明](PORDA-Installation-and-Validation.md)。
+最低系统与原生组件部署目标、签名完整性、入门资料、安装资源不被运行时改写，以及 Launch Services 正常启动已核对。测试运行于当前 Mac，没有在 macOS 14 实机运行；未穷举全部转换格式，也未重测本次安装包原生窗口中的 Finder 手势、截图、系统剪贴板或原生窗口自动视觉操作。Windows 未在本次重新构建或验收。完整范围见 [安装与验收说明](PORDA-Installation-and-Validation.md)。
 
-变化见 [PORDA 更新记录](RELEASE_NOTES.md)。公开发行内容仅包含安装包、校验值、许可和用户说明；不发布私有应用源码、构建输入或个人项目。
-
-现有配套 Skill 保留标识 `portdepot-canvas-agent`，可按 [Skill 说明](portdepot-canvas-agent/SKILL.md) 使用。本次未另行发布 Skill 安装包。
+公开仓库提供安装包、更新说明、许可和校验值；私有应用源码、构建输入与个人项目不公开。配套 Skill 保留 [portdepot-canvas-agent](portdepot-canvas-agent/SKILL.md) 标识，本次未另发 Skill 包。
 
 ## 公开发行范围与许可
 
@@ -74,17 +66,15 @@ PolyForm Noncommercial 是限制商业用途的源码可见许可证，不属于
 
 ## English
 
-**PORDA / 泊达** is a local infinite-canvas file manager and collection workspace, formerly Port Depot. Files are real filesystem objects; canvas JSON stores their presentation, notes, spatial groups and connections.
+**PORDA / 泊达** is a local canvas file manager and collection workspace, formerly Port Depot. Real files stay in real folders; the canvas stores layout, notes, spatial groups and connections.
 
-**Public test release 2026.10.13.1 · application/installer version 1.1.6 · Windows x64 · macOS 14+ Apple silicon**
+**Latest macOS test release: 2026.11.02.1, app 1.1.7, Apple silicon, macOS 14+. Windows remains 2026.10.13.1 / 1.1.6.**
 
-This update fixes clipboard shortcut conflicts, adds the **T** text tool, makes existing connector labels editable with a single click, and fixes collection-popup drag into the canvas. Files use the native system file clipboard; newer copied text replaces old file references. Notes copy as plain text and paste as annotations without creating TXT files. Files and notes must be copied separately. External file drops move the originals; undo restores them. Deleting a spatial group keeps its files. Windows excludes pets.
+This Mac update adds a file context-menu conversion dialog powered by bundled Filee 2.2.0, and a separate circular refresh button beside the existing four-button toolbar. Conversion keeps the original and creates real output files with collision protection and undo. Refresh saves current edits before scanning the physical folder for additions, changes, renames and deletions. Filee's CLI runtime and a macOS-14-compatible official 7-Zip 26.05 are included; no separate Filee GUI, Python or .NET installation is required. Large optional engines such as FFmpeg and LibreOffice are not included, and only locally available routes are offered. The bundled runtime increases the Mac download size.
 
-Get both platform installers, guides, validation reports and SHA-256 values from the [2026.10.13.1 Release](https://github.com/Acho001/PORDA/releases/tag/v2026.10.13.1). **Windows**: run the x64 Setup.exe; no system Python, Node.js or external browser is required. User data stays in `%LOCALAPPDATA%\Port Depot Data`. **macOS**: open the arm64 DMG and drag PORDA.app into Applications, replacing the old application after quitting it. Data stays in `~/Library/Application Support/Port Depot`.
+Download the [2026.11.02.1 Mac DMG](https://github.com/Acho001/PORDA/releases/tag/v2026.11.02.1); Windows users continue to use the [previous Windows release](https://github.com/Acho001/PORDA/releases/tag/v2026.10.13.1). Quit PORDA and replace the single PORDA.app in Applications. Keep `~/Library/Application Support/Port Depot` to preserve your data. This Mac build is ad-hoc signed and not notarized.
 
-All **22 current-version native Windows checks** passed on Windows 11 x64. They cover installation, Unicode paths, native file/text/bitmap clipboard, real move/undo, collection drag, text tools, connector editing, restart persistence and shutdown of the owned backend. Manual Explorer gestures, screenshot/cropping, cross-version upgrades and uninstallation were not tested for this release. macOS passed **19 package checks**, including **12 packaged-backend interaction checks**, plus **13 native clipboard/menu checks** on the same source revision. Launch Services startup passed; native packaged-window visual automation was not completed. Consult the attached scope report; these results do not cover every device or application.
-
-These test builds are not Authenticode-signed or Apple-notarized; the macOS app is ad-hoc signed. Verify the release origin and SHA-256. The public repository distributes installers and documentation without private application source, build inputs or personal projects.
+Validation includes 49 source filesystem regressions, 28 packaged Mac checks, 12 existing packaged-backend interactions, new conversion/sync UI checks, actual bundled-engine conversions and normal Launch Services startup. Deployment targets were inspected, but macOS 14 was not tested on a physical machine. Not every format was exercised; native packaged-window visual automation, Finder gestures, screenshots and native system-clipboard acceptance were not rerun for this release. Windows was not rebuilt. See the [scope report](PORDA-Installation-and-Validation.md) and release SHA-256 values.
 
 ### Public distribution scope and license
 
