@@ -1,3 +1,28 @@
+# PORDA · 泊达 2026.11.02.2 — macOS 画板打开修复
+
+应用版本 **1.1.8**，Apple Silicon，macOS 14+。本次仅更新 Mac；Windows 保持 2026.10.13.1。
+
+- 修复包含工程目录/依赖目录时画板加载卡住的问题。扫描仅登记当前层子文件夹，进入后再读取下一层，不再递归建立整个目录树。
+- 后台轮询改为只读版本信息；打开画板和点击圆形同步按钮时才扫描当前层，减少反复扫描与索引。
+- 保留原有画板 ID、布局、注释、空间分组与源文件；外部文件夹更名和副本身份仍能正确处理。
+- 保留上一版 Filee 本地格式转换及独立圆形同步按钮。包内包含 Filee CLI 2.2.0 与兼容的 7-Zip 26.05，无需另装 Filee GUI、Python 或 .NET。
+
+本次验证：**51 项文件回归、28 项包内检查、12 项既有交互回归**及转换/同步界面检查通过。使用带工程依赖的既有资料副本测试，三个画板均正常扫描，93 节点画板能够单击进入，后台未再生成深层依赖画板；本机实际原生窗口也已确认显示。
+
+上一版的简单测试资料未覆盖这种复杂目录，此版补充了相应回归。测试时间仅代表当前机器，不是性能承诺。没有穷举全部格式，未在 macOS 14 实机运行；未重测 Finder 手势、原生截图与系统剪贴板验收。完整范围见随附验证说明。
+
+安装：退出 PORDA，打开 DMG，将 PORDA.app 拖入“应用程序”并替换旧版。保留用户数据目录。安装包约 **139.3 MB**，ad-hoc 签名，未 Apple 公证。建议 2026.11.02.1 的 Mac 用户更新到本版。
+
+[下载修复版](https://github.com/Acho001/PORDA/releases/tag/v2026.11.02.2)。校验值见 SHA256SUMS.txt。公开发行不含私有应用源码或个人资料。
+
+## English
+
+Mac-only hotfix 2026.11.02.2, app 1.1.8, Apple silicon, macOS 14+. Fixes canvas opening stalls by registering only the current folder level and loading children on entry. Background polling now reads revision metadata rather than repeatedly scanning the filesystem. Keeps existing layout, notes, real files, Filee conversion and the circular sync button. Windows remains unchanged.
+
+Validated with 51 filesystem regressions, 28 packaged checks, 12 existing interaction checks, conversion/sync UI checks, complex-directory data and actual installed native-window opening of a 93-node board. Tests do not cover every format or device; no physical macOS 14 test, native Finder gesture, screenshot or clipboard acceptance was rerun. Ad-hoc signed, not notarized. Update from the previous Mac release while preserving the user-data directory.
+
+---
+
 # PORDA · 泊达 2026.11.02.1 — macOS 格式转换与目录同步
 
 本次仅发布 macOS Apple Silicon 安装包，最低 macOS 14，应用版本 1.1.7。Windows 保持 [2026.10.13.1](https://github.com/Acho001/PORDA/releases/tag/v2026.10.13.1)。
