@@ -1,3 +1,24 @@
+# PORDA · 泊达 2026.11.04.1 — Mac 交互与画板性能优化
+
+应用 **1.1.9**，Apple Silicon / macOS 14+。Windows 暂不更新。
+
+- 格式转换改为 Filee 风格环形菜单，直接点选格式，支持分页和键盘，无搜索框。
+- 修复图片注释与右键菜单遮挡、注释输入失焦、菜单滚动误缩放画板。
+- 合并视口更新，保留小地图及未变化连线，缓存节点尺寸，减少大画板重复工作；保持媒体播放和连线文字编辑。
+- 保留真实文件转换、原件保护、文件撤销与真实目录同步。自带 Filee CLI 2.2.0 和兼容的 7-Zip 26.05。
+
+51项文件回归、141项连接算法用例、状态测试、30项实际包内检查、12项既有交互及14项针对性Mac原生检查通过。性能基准及五千节点限制见随附说明；不将Chrome模拟基准宣传为所有规模稳定60fps。未在物理macOS14测试，未穷举格式或重测原生截图/Finder手势。
+
+退出 PORDA 后打开 DMG，将 PORDA.app 拖入“应用程序”替换旧版。保留用户资料目录。安装包约 **139.4 MB**，本地ad-hoc签名，未Apple公证。公开仓库仅提供安装包和文档，不包含私有应用源码或个人资料。
+
+[下载本版](https://github.com/Acho001/PORDA/releases/tag/v2026.11.04.1)。SHA256见随附校验文件。
+
+## English
+
+Mac-only update 2026.11.04.1, app 1.1.9. Direct radial format selection without search; image annotation/context-menu and scrolling fixes; less redundant work for large canvases through frame scheduling, retained layers and geometry caching. Preserves real-file conversion, originals, undo and folder synchronization. Includes Filee 2.2.0 and compatible 7-Zip 26.05. Validated with source, packaged and targeted native WKWebView regressions. Synthetic benchmarks have documented scale limits and are not native FPS guarantees. Ad-hoc signed, not notarized. Windows remains unchanged.
+
+---
+
 # PORDA · 泊达 2026.11.02.2 — macOS 画板打开修复
 
 应用版本 **1.1.8**，Apple Silicon，macOS 14+。本次仅更新 Mac；Windows 保持 2026.10.13.1。
